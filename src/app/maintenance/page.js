@@ -1,5 +1,7 @@
 "use client";
+
 import { useState } from "react";
+import Link from "next/link";
 
 export default function Maintenance() {
   const [formData, setFormData] = useState({
@@ -14,11 +16,13 @@ export default function Maintenance() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleFileChange = (e) => {
-    setFormData({ ...formData, file: e.target.files[0] });
+    if (e.target.files.length > 0) {
+      setFormData((prev) => ({ ...prev, file: e.target.files[0] }));
+    }
   };
 
   const handleSubmit = (e) => {
@@ -32,13 +36,13 @@ export default function Maintenance() {
     console.log("Submitted Data:", formData);
     setMessage("✅ Your maintenance request has been submitted!");
 
-    // Reset form
+    // Reset form (except file)
     setFormData({
       name: "",
       email: "",
       issueType: "",
       description: "",
-      file: null,
+      file: formData.file, // Retain file after submission
     });
   };
 
@@ -48,11 +52,11 @@ export default function Maintenance() {
       <aside className="w-1/5 bg-gray-900 text-white p-6 min-h-screen">
         <h2 className="text-lg font-semibold mb-4">Navigation</h2>
         <nav className="space-y-4">
-          <a href="/" className="block hover:text-gray-300">🏠 Home</a>
-          <a href="/announcements" className="block hover:text-gray-300">📢 Announcements</a>
-          <a href="/committee" className="block hover:text-gray-300">👥 Committee Members</a>
-          <a href="/financial-reports" className="block hover:text-gray-300">📊 Financial Reports</a>
-          <a href="/contact-feedback" className="block hover:text-gray-300">✉️ Contact & Feedback</a>
+          <Link href="/" className="block hover:text-gray-300">🏠 Home</Link>
+          <Link href="/announcements" className="block hover:text-gray-300">📢 Announcements</Link>
+          <Link href="/committee" className="block hover:text-gray-300">👥 Committee Members</Link>
+          <Link href="/financial-reports" className="block hover:text-gray-300">📊 Financial Reports</Link>
+          <Link href="/contact-feedback" className="block hover:text-gray-300">✉️ Contact & Feedback</Link>
         </nav>
       </aside>
 
@@ -129,7 +133,7 @@ export default function Maintenance() {
 
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+            className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
           >
             Submit Request
           </button>
