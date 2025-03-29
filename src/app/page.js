@@ -54,11 +54,11 @@ export default function Home() {
           <h2 className="text-2xl font-bold text-gray-800 mb-4">What Our Residents Say</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <blockquote className="p-6 bg-white rounded-lg shadow-md border-l-4 border-blue-600">
-              <p className="italic text-black">"This portal has made managing our building so much easier!"</p>
+              <p className="italic text-black">This portal has made managing our building so much easier!</p>
               <footer className="mt-2 text-sm font-semibold text-gray-600">— John Applebaum</footer>
             </blockquote>
             <blockquote className="p-6 bg-white rounded-lg shadow-md border-l-4 border-blue-600">
-              <p className="italic text-black">"I love how I can request maintenance directly from my phone."</p>
+              <p className="italic text-black">I love how I can request maintenance directly from my phone.</p>
               <footer className="mt-2 text-sm font-semibold text-gray-600">— Jordan Stapleton</footer>
             </blockquote>
           </div>
