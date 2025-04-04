@@ -1,8 +1,17 @@
-"use client";
+// "use client";
 
 import Link from "next/link";
 
 export default function Home() {
+
+  console.log(process.env.TEST_VARIABLE)
+
+  // const [envv, setEnvv] = useState("");
+
+  // useEffect(() => {
+  //   setEnvv(process.env.TEST_VARIABLE)
+  // }, [process.env.TEST_VARIABLE])
+
   return (
     <div className="flex min-h-screen bg-gray-50">
       {/* Sidebar */}
@@ -67,9 +76,7 @@ export default function Home() {
         {/* Environment Variable Display */}
         <section className="mt-12 p-6 bg-gray-200 rounded-lg">
           <h2 className="text-lg font-semibold text-black">Environment Variable Test</h2>
-          <p className="text-black">
-            Value: {process.env.TEST_VARIABLE}
-          </p>
+          <p className="text-black">Value: {process.env.TEST_VARIABLE}</p>
         </section>
 
         {/* Footer */}
