@@ -32,11 +32,7 @@
         "dest": "/"
       }
     ],
-    "env": {
-      "NEXT_PUBLIC_SITE_NAME": "Strata Management Portal",
-      "NEXT_PUBLIC_CONTACT_EMAIL": "contact@stratamanagement.com",
-      "NEXT_PUBLIC_TEST_VARIABLE": "Hello from Vercel!"
-    },
+    
     "alias": "strata-management-portal"
   }
   

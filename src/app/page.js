@@ -68,7 +68,7 @@ export default function Home() {
         <section className="mt-12 p-6 bg-gray-200 rounded-lg">
           <h2 className="text-lg font-semibold text-black">Environment Variable Test</h2>
           <p className="text-black">
-            Value: {process.env.NEXT_PUBLIC_TEST_VARIABLE || "No variable set"}
+            Value: {process.env.NEXT_PUBLIC_TEST_VARIABLE}
           </p>
         </section>
 
