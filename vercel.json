@@ -32,7 +32,7 @@
         "dest": "/"
       }
     ],
-    
+    "regions": ["syd1", "fra1"],
     "alias": "strata-management-portal"
   }
   
