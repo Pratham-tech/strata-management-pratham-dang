@@ -1,6 +1,31 @@
+"use client";
+import { useState } from "react";
 import Link from "next/link";
 
 export default function ContactFeedback() {
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [status, setStatus] = useState("");
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
+
+    if (res.ok) {
+      setStatus("Message sent!");
+      setFormData({ name: "", email: "", message: "" });
+    } else {
+      setStatus("Failed to send message.");
+    }
+  };
+
   return (
     <div className="flex min-h-screen bg-gray-100">
       {/* Sidebar */}
@@ -19,24 +44,45 @@ export default function ContactFeedback() {
         <h1 className="text-2xl text-black font-bold">Contact & Feedback</h1>
         <p className="mt-2 text-black">Have concerns or suggestions? Let us know!</p>
 
-        {/* Feedback Form */}
-        <form className="mt-4 space-y-4">
+        <form onSubmit={handleSubmit} className="mt-4 space-y-4">
           <label className="block">
             <span className="text-lg text-black">Your Name</span>
-            <input type="text" className="w-full p-2 mt-1 border rounded border-black" required />
+            <input
+              name="name"
+              type="text"
+              className="w-full p-2 mt-1 border rounded border-black"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
           </label>
 
           <label className="block">
             <span className="text-lg text-black">Your Email</span>
-            <input type="email" className="w-full p-2 mt-1 border rounded border-black" required />
+            <input
+              name="email"
+              type="email"
+              className="w-full p-2 mt-1 border rounded border-black"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
           </label>
 
           <label className="block">
             <span className="text-lg text-black">Message</span>
-            <textarea className="w-full p-2 mt-1 border rounded border-black" rows="4" required></textarea>
+            <textarea
+              name="message"
+              className="w-full p-2 mt-1 border rounded border-black"
+              rows="4"
+              value={formData.message}
+              onChange={handleChange}
+              required
+            ></textarea>
           </label>
 
           <button type="submit" className="px-4 py-2 bg-blue-600 text-white">Send Message</button>
+          {status && <p className="mt-2 text-black">{status}</p>}
         </form>
       </main>
     </div>
