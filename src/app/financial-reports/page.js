@@ -1,6 +1,10 @@
+// src/app/financial-reports/page.js
 import Link from "next/link";
+import prisma from "../../../lib/prisma";
 
-export default function FinancialReports() {
+export default async function FinancialReports() {
+  const reports = await prisma.financialReport.findMany();
+
   return (
     <div className="flex min-h-screen bg-gray-100">
       {/* Sidebar */}
@@ -17,27 +21,21 @@ export default function FinancialReports() {
 
       {/* Main Content */}
       <main className="p-6 mx-auto">
-        <h1 className="text-2xl font-bold text-black">Financial Reports</h1>
+        <h1 className="text-2xl font-bold text-black">📊 Financial Reports</h1>
         <p className="mt-2 text-black">View the latest budget, levies, and financial updates.</p>
 
-        {/* Sample Reports */}
         <div className="mt-4 space-y-4">
-          <a
-            href="/files/q1-financial-report.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block text-blue-600 underline"
-          >
-            🔹 Q1 Financial Report (PDF)
-          </a>
-          <a
-            href="/files/annual-budget.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block text-blue-600 underline"
-          >
-            🔹 Annual Budget (PDF)
-          </a>
+          {reports.map((report) => (
+            <a
+              key={report.id}
+              href={report.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block text-blue-600 underline"
+            >
+              🔹 {report.title}
+            </a>
+          ))}
         </div>
       </main>
     </div>

@@ -1,8 +1,10 @@
-"use client";
-
+// src/app/announcements/page.js
 import Link from "next/link";
+import prisma from "../../../lib/prisma";
 
-export default function Announcements() {
+export default async function Announcements() {
+  const announcements = await prisma.announcement.findMany();
+
   return (
     <div className="flex min-h-screen bg-gray-100">
       {/* Sidebar */}
@@ -25,18 +27,12 @@ export default function Announcements() {
         </p>
 
         <div className="space-y-4">
-          <article className="p-4 bg-gray-100 rounded-lg">
-            <h2 className="text-xl text-black font-semibold">🚧 Elevator Maintenance</h2>
-            <p className="text-gray-600">The main elevator will be out of service on March 30th for repairs.</p>
-          </article>
-          <article className="p-4 bg-gray-100 rounded-lg">
-            <h2 className="text-xl text-black font-semibold">🔥 Fire Safety Inspection</h2>
-            <p className="text-gray-600">Annual fire safety checks will take place on April 5th. Please allow access.</p>
-          </article>
-          <article className="p-4 bg-gray-100 rounded-lg">
-            <h2 className="text-xl text-black font-semibold">🏗️ Parking Lot Renovation</h2>
-            <p className="text-gray-600">The underground parking lot will be closed for resurfacing from April 10-15.</p>
-          </article>
+          {announcements.map((announcement) => (
+            <article key={announcement.id} className="p-4 bg-gray-100 rounded-lg">
+              <h2 className="text-xl text-black font-semibold">{announcement.title}</h2>
+              <p className="text-gray-600">{announcement.content}</p>
+            </article>
+          ))}
         </div>
       </main>
     </div>

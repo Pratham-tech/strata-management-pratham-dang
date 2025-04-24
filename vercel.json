@@ -1,38 +1,14 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "package.json",
-        "use": "@vercel/next"
-      }
-    ],
-    "routes": [
-      {
-        "src": "/announcements",
-        "dest": "/announcements"
-      },
-      {
-        "src": "/maintenance",
-        "dest": "/maintenance"
-      },
-      {
-        "src": "/committee",
-        "dest": "/committee"
-      },
-      {
-        "src": "/financial-reports",
-        "dest": "/financial-reports"
-      },
-      {
-        "src": "/contact-feedback",
-        "dest": "/contact-feedback"
-      },
-      {
-        "src": "/",
-        "dest": "/"
-      }
-    ],
-    "regions": ["syd1", "fra1"],
-    "alias": "strata-management-portal"
-  }
-  
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/next"
+    },
+    {
+      "src": "api/*.php",
+      "use": "vercel-php@0.5.0"
+    }
+  ],
+  "alias": "strata-management-portal"
+}

@@ -1,19 +1,36 @@
-// "use client";
+"use client";
 
+import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
 import Link from "next/link";
+import { Sun, Moon } from "lucide-react";
 
 export default function Home() {
+  const [darkMode, setDarkMode] = useState(false);
 
-  console.log(process.env.TEST_VARIABLE)
+  useEffect(() => {
+    const theme = Cookies.get("theme");
+    if (theme === "dark") {
+      setDarkMode(true);
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, []);
 
-  // const [envv, setEnvv] = useState("");
-
-  // useEffect(() => {
-  //   setEnvv(process.env.TEST_VARIABLE)
-  // }, [process.env.TEST_VARIABLE])
+  const toggleDarkMode = () => {
+    const newMode = !darkMode;
+    setDarkMode(newMode);
+    Cookies.set("theme", newMode ? "dark" : "light", { expires: 365 });
+    if (newMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  };
 
   return (
-    <div className="flex min-h-screen bg-gray-50">
+    <div className={`flex min-h-screen ${darkMode ? 'bg-black text-white' : 'bg-gray-50 text-black'}`}>
       {/* Sidebar */}
       <aside className="w-1/5 bg-gray-900 text-white p-6 min-h-screen">
         <h2 className="text-lg font-semibold mb-4">Navigation</h2>
@@ -27,7 +44,16 @@ export default function Home() {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 p-8">
+      <main className="flex-1 p-8 relative">
+        {/* Dark Mode Toggle Icon */}
+        <button
+          onClick={toggleDarkMode}
+          className="absolute top-6 right-6 z-50 p-2 bg-blue-600 text-white rounded-full shadow-md hover:bg-blue-700 transition-all"
+          aria-label="Toggle Dark Mode"
+        >
+          {darkMode ? <Sun size={24} /> : <Moon size={24} />}
+        </button>
+
         {/* Hero Section */}
         <div className="relative w-full h-[400px] bg-cover bg-center rounded-lg shadow-lg overflow-hidden">
           <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-center p-6">
@@ -76,7 +102,7 @@ export default function Home() {
         {/* Environment Variable Display */}
         <section className="mt-12 p-6 bg-gray-200 rounded-lg">
           <h2 className="text-lg font-semibold text-black">Environment Variable Test</h2>
-          <p className="text-black">Value: {process.env.TEST_VARIABLE}</p>
+          <p className="text-black">Value: {process.env.NEXT_PUBLIC_TEST_VARIABLE}</p>
         </section>
 
         {/* Footer */}
@@ -91,4 +117,3 @@ export default function Home() {
     </div>
   );
 }
-
