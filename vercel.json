@@ -7,7 +7,7 @@
     },
     {
       "src": "api/*.php",
-      "use": "vercel-php@0.6.1"
+      "use": "vercel-php@0.6.0"
     }
   ],
   "alias": "strata-management-portal"
