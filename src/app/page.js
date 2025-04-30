@@ -80,7 +80,15 @@ export default function Home() {
           </div>
           <div className="p-6 bg-white shadow-md rounded-lg text-center hover:shadow-lg transition">
             <h3 className="text-xl text-black font-semibold mb-2">👥 Connect with Committee</h3>
-            <p className="text-gray-700">Reach out to committee members for support.</p>
+            <p className="text-gray-700 mb-2">Reach out to committee members for support.</p>
+            <a
+              href="/api/index.php"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block mt-2 text-blue-600 hover:underline text-sm"
+            >
+              View detailed overview (PHP)
+            </a>
           </div>
         </section>
 
@@ -117,3 +125,4 @@ export default function Home() {
     </div>
   );
 }
+

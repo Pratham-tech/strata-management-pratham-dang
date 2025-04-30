@@ -4,9 +4,9 @@ echo "<p>This building is managed under the Strata Schemes Management Act (2015)
 
 echo "<h3>Committee Members</h3>";
 echo "<ul>
-  <li><strong>Chairperson:</strong> Alex Tan</li>
-  <li><strong>Treasurer:</strong> Priya Patel</li>
-  <li><strong>Secretary:</strong> John Smith</li>
+  <li><strong>Chairperson:</strong> John Smith </li>
+  <li><strong>Treasurer:</strong> Michael Johnson </li>
+  <li><strong>Secretary:</strong> Jane Doe</li>
   <li><strong>Members:</strong> 5 in total</li>
 </ul>";
 
