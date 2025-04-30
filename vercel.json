@@ -10,5 +10,11 @@
       "use": "@vercel/php"
     }
   ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
+    }
+  ],
   "alias": "strata-management-portal"
 }
