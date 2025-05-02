@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import Link from "next/link";
+import Image from "next/image";
 import { Sun, Moon } from "lucide-react";
 
 export default function Home() {
@@ -65,6 +66,20 @@ export default function Home() {
             <Link href="/maintenance" className="mt-6 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg text-lg font-semibold shadow-md transition-all duration-300">
               Submit a Request
             </Link>
+          </div>
+        </div>
+
+        {/* Image Section */}
+        <div className="mt-12 flex justify-center">
+          <div className="rounded-lg overflow-hidden shadow-lg max-w-4xl w-full">
+            <Image
+              src="/strata-image.jpg"
+              alt="Modern strata-managed building"
+              width={1200}
+              height={600}
+              className="w-full h-auto object-cover"
+              priority
+            />
           </div>
         </div>
 
