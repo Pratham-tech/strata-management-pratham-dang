@@ -1,9 +1,12 @@
 {
   "version": 2,
   "functions": {
-    "api/*.php": {
-      "runtime": "vercel-php@0.7.3"
+    "api/index.php": {
+      "runtime": "vercel-php@0.7.1"
     }
   },
+  "routes": [
+    { "src": "/php", "dest": "/api/index.php" }
+  ],
   "alias": "strata-management-portal"
 }
