@@ -82,7 +82,7 @@ export default function Home() {
             <h3 className="text-xl text-black font-semibold mb-2">👥 Connect with Committee</h3>
             <p className="text-gray-700 mb-2">Reach out to committee members for support.</p>
             <a
-              href="./api/index"
+              href="./api/index.php"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block mt-2 text-blue-600 hover:underline text-sm"
