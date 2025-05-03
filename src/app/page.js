@@ -73,12 +73,11 @@ export default function Home() {
         <div className="mt-12 flex justify-center">
           <div className="rounded-lg overflow-hidden shadow-lg max-w-4xl w-full">
             <Image
-              src="/strata-image.jpg"
+              src="/image.jpeg"
               alt="Modern strata-managed building"
               width={1200}
               height={600}
               className="w-full h-auto object-cover"
-              priority
             />
           </div>
         </div>
