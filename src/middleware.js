@@ -3,12 +3,15 @@ import { NextResponse } from "next/server";
 export function middleware(req) {
   const { pathname } = req.nextUrl;
 
-  // Allow static assets like CSS, images, and fonts
-  if (pathname.startsWith("/_next/") || pathname.startsWith("/static/")) {
+  // Allow static assets like CSS, images, fonts, and anything with an extension
+  if (
+    pathname.startsWith("/_next/") ||
+    pathname.startsWith("/static/") ||
+    pathname.match(/\.(jpg|jpeg|png|svg|gif|webp|ico|css|js|woff2?|ttf)$/)
+  ) {
     return NextResponse.next();
   }
 
-  // Define allowed paths
   const allowedPaths = [
     "/",
     "/announcements",
