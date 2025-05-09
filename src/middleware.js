@@ -19,6 +19,7 @@ export function middleware(req) {
     "/committee",
     "/financial-reports",
     "/contact-feedback",
+    "/api/contact"
   ];
 
   if (allowedPaths.includes(pathname)) {

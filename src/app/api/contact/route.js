@@ -1,9 +1,8 @@
-// app/api/contact/route.js
-
 import { Pool } from 'pg';
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false }, // required for Neon
 });
 
 export async function POST(req) {
@@ -37,8 +36,17 @@ export async function POST(req) {
 }
 
 export async function GET() {
-  return new Response(JSON.stringify({ message: 'GET request to /api/contact' }), {
-    status: 200,
-    headers: { 'Content-Type': 'application/json' },
-  });
+  try {
+    const result = await pool.query('SELECT * FROM messages ORDER BY id DESC');
+    return new Response(JSON.stringify(result.rows), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  } catch (error) {
+    console.error('Database error:', error);
+    return new Response(JSON.stringify({ error: 'Database error' }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
 }

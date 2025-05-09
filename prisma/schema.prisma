@@ -35,3 +35,11 @@ model FinancialReport {
   fileName  String   // The actual file name (stored in your public folder or cloud storage)
   createdAt DateTime @default(now())
 }
+
+model messages {
+  id        Int      @id @default(autoincrement()) // Primary key with auto-increment
+  name      String   // User's name
+  email     String   // User's email
+  message   String   // User's feedback or message
+  createdAt DateTime @default(now()) // Timestamp for when the message was created
+}
