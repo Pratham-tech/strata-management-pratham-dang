@@ -1,23 +1,44 @@
 // app/api/contact/route.js
 
+import { Pool } from 'pg';
+
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+});
+
 export async function POST(req) {
+  try {
     const body = await req.json();
-  
-    return new Response(JSON.stringify({
-      message: "Form submitted!",
-      data: body,
-    }), {
+    const { name, email, message } = body;
+
+    if (!name || !email || !message) {
+      return new Response(JSON.stringify({ error: 'Missing fields' }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
+    await pool.query(
+      'INSERT INTO messages (name, email, message) VALUES ($1, $2, $3)',
+      [name, email, message]
+    );
+
+    return new Response(JSON.stringify({ message: 'Form submitted and saved!' }), {
       status: 200,
-      headers: { "Content-Type": "application/json" },
+      headers: { 'Content-Type': 'application/json' },
+    });
+  } catch (error) {
+    console.error('Database error:', error);
+    return new Response(JSON.stringify({ error: 'Database error' }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' },
     });
   }
-  
-  export async function GET() {
-    return new Response(JSON.stringify({
-      message: "GET request to /api/contact",
-    }), {
-      status: 200,
-      headers: { "Content-Type": "application/json" },
-    });
-  }
-  
+}
+
+export async function GET() {
+  return new Response(JSON.stringify({ message: 'GET request to /api/contact' }), {
+    status: 200,
+    headers: { 'Content-Type': 'application/json' },
+  });
+}
